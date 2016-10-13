@@ -2,32 +2,58 @@
 
 # Read in the female baby names csv file into a variable called `female.names`
 
+setwd('~/Desktop/Info/m8-dataframes/exercise-6')
+female.names <- read.csv('Data/female_names.csv', stringsAsFactors = FALSE)
 
 # Create a vector `year` as the year column of the dataset
 
+year <- as.vector(female.names$year)
 
 # Create a vector `name` as the name column of the datset
 # As in the last exercise, you'll need to convert this column to a vector
 
+name <- as.vector(female.names$name)
 
 # Create a vector `prop` as the proportion column of the dataset
 
+prop <- as.vector(female.names$prop)
 
 # Create a vector `names.2013` as your name vector where your year vector is 2013
 
+names.2013 <- name[year == 2013]
 
-# Create a vector `prop.2013` as the your prop vector where your year vecctor is 2013
+# Create a vector `prop.2013` as the your prop vector where your year vector is 2013
 
+prop.2013 <- prop[year == 2013]
 
 # What was the most popular female name in 2013?
-
+  
+  year.2013 <- data.frame(names.2013, prop.2013, stringsAsFactors = FALSE)
+  
+  most.popular.name.2013 <- year.2013$names.2013[year.2013$prop.2013 == max(year.2013$prop.2013)]
+  
 
 # Write a funciton `MostPopular` that takes in a value `my.year`, and returns
-# a sentence stating the most popular name in that year. 
+# a sentence stating the most popular name in that year.
+
+MostPopular = function(entered.year) {
+  
+  names.entered.year <- name[year == entered.year]
+  
+  prop.entered.year <- prop[year == entered.year]
+  
+year.entered.year <- data.frame(names.entered.year, prop.entered.year, stringsAsFactors = FALSE)
+
+most.popular.name.entered.year <- year.entered.year$names.entered.year[year.entered.year$prop.entered.year == max(year.entered.year$prop.entered.year)]
+
+return(paste("The most popular female name of ",entered.year, " is ",most.popular.name.entered.year, ".", sep = ""))
+
+}
 
 
 # What was the most popular female name in 1994?
 
+MostPopular(1994)
 
 ### Bonus ###
 
